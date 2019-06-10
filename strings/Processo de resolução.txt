@@ -1,0 +1,42 @@
+### Resolução do problema de formatação de texto
+
+Implemente uma função que receba:
+1. um texto qualquer
+2. um limite de comprimento
+
+### Parte 1 (Básico) - limite 40 caracteres
+Você deve seguir o exemplo de output [deste arquivo](https://github.com/idwall/desafios/blob/master/strings/output_parte1.txt), onde basta o texto possuir, no máximo, 40 caracteres por linha. As palavras não podem ser quebradas no meio.
+
+A resolução desta parte do problema foi contruida no arquivo formatText.py.
+O programa recebe como parametros o texto, numero de caracteres por linha e se deve ou não ter a saida justificada.
+A saida justificada, será explicada na Parte 2, onde este desafio foi proposto.
+O script gera uma lista a partir do texto passado como parametro, cada item desta lista foi separado por um '\n'.
+Cada item desta lista é acrescido de um novo '\n', desta maneira evitamos consecutivos '\n', o que atrapalha na hora de contar os caracteres.
+Em seguida cada item da lista anterior é novamente quebrado em outra lista so que desta vez separados por ' '.
+Obtemos então uma lista de palavras com ou sem '\n' porem sem repetições de '\n'.
+O sistema inicia a composição de uma linha colocando as palavras da lista e checando o numero de caracteres.
+Caso o tamanho total dos caracteres na linha exceda o parametro solicitado para o numero da caracteres, o script retira a ultima palavra da linha e acrescenta um '\n' caso ainda não tenha.
+Este processo é repetido até que a lista de palavras seja esgotada.
+O texto gerado possui o numero maximo de caracteres por linha passado pelo parametro numero da caracteres.
+
+
+### Parte 2 (Intermediário) - limite 40 caracteres
+O exemplo de output está [neste arquivo](https://github.com/idwall/desafios/blob/master/strings/output-parte2.txt), onde além de o arquivo possuir, no máximo, 40 caracteres por linha, o texto deve estar **justificado**.
+
+A resolução desta parte do problema foi contruida no mesmo arquivo formatText.py.
+O programa recebe como parametros o texto, numero de caracteres por linha e se deve ou não ter a saida justificada.
+Para gerar a saida justificada, o sistema utiliza o texto gerado na Parte 1 quando o parametro para texto justificado é True.
+O script cria uma lista contendo o numero de caracteres por palavra somado ao numero de espaços.
+Exemplo: "Que código legal" => [len(Que),len(' '),len(código),len(' '),len(legal)] => [3,1,6,1,5]
+Supondo agora que o parametro passado como numero de caracteres por linha foi 21.
+O script inicia o incremento do numero de espaços até atingir o numero máximo parametrizado.
+Exemplo para parametro 21:
+[3,1,6,1,5] => Espaço = 1; Caracteres = 16 (Total de Caracteres <21 -> continue)
+[3,2,6,2,5] => Espaço = 2; Caracteres = 18 (Total de Caracteres <21 -> continue)
+[3,3,6,3,5] => Espaço = 3; Caracteres = 20 (Total de Caracteres <21 -> continue)
+[3,4,6,3,5] => Espaço = 4; Caracteres = 21 (Total de Caracteres =21 -> Pare, com a primeira substituição de espaço=4 o valor 21 foi atingido)
+
+Então esta frase justificada com parametro de caracteres por linha igual a 21 fica:
+|123456789012345678901| 21 caracteres
+|Que    código   legal|
+

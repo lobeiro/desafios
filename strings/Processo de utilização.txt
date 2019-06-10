@@ -1,0 +1,41 @@
+### Utilização da solução do problema de formatação de texto
+
+Implemente uma função que receba:
+1. um texto qualquer
+2. um limite de comprimento
+
+O script da solução é o formatText.py e utiliza as seguintes dependencias:
+sys;argparse
+
+Para utilização do script formatText.py, o usuário deve estar no diretório .\desafios\strings e digitar o comando "python formatText.py" seguido do texto, numero de caracteres por linha e se deve ou não ter saida justificada, abaixo alguns exemplos de comando:
+
+c:\desafios\strings>python formatText.py "Texto de exemplo que devera ter sua saida formatada conforme os parametros" 20 False
+O texto de saida deverá ser:
+
+Texto de exemplo que
+devera ter sua saida
+formatada conforme
+os parametros
+
+c:\desafios\strings>python formatText.py "Texto de exemplo que devera ter sua saida formatada conforme os parametros" 20 True
+O texto de saida deverá ser:
+
+Texto de exemplo que
+devera ter sua saida
+formatada   conforme
+os        parametros
+
+c:\desafios\strings>python formatText.py -h
+O texto de saida será a ajuda e deverá ser:
+
+    usage: formatText.py [-h] text limit justify
+
+    Formatador de texto.
+
+    positional arguments:
+      text        Texto que dever ser formatado.
+      limit       Numero de caracteres por linha.
+      justify     Justificar o texto de saida. (True/False)
+
+    optional arguments:
+      -h, --help  show this help message and exit

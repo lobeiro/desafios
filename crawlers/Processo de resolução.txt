@@ -1,0 +1,36 @@
+### Resolução do problema de threads com mais de 5k votos
+
+### Parte 1
+Gerar e imprimir uma lista contendo a pontuação, subreddit, título da thread, link para os comentários da thread e link da thread.
+Essa parte pode ser um CLI simples, desde que a formatação da impressão fique legível.
+
+A solução deste problema foi desenvolvida no arquivo redditVotes.py.
+O programa é um CLI básico que recebe uma lista com nomes de subreddits separados por ponto-e-virgula Ex: "cars;movies;games"
+O script utiliza o Browser padrão do sistema e carrega as paginas listadas no parametro de chamada.
+Com o pyautogui se encarrega de salvar a página aberta.
+O parsing da página é feito pelo BeautifulSoup:
+    1 - Obtemos todos os titulos no HTML salvo com soup.find_all('a',class_='title').
+    2 - Obtemos o numero de votos real pelo soup.find_all(class_="score likes")->subSoup.find_all('div') e filtramos o resultado com ['title']
+    3 - As demais informações são então obtidas com:
+        3.1 - link dos comentarios = 'data-permalink'
+        3.2 - link da thread = 'data-url' 
+        3.3 - informação do subreddit = 'data-subreddit-prefixed'
+O script gera um dicionário com os dados obtidos via parsing do BeautifulSoup e verifica se a pontuação esta acima de 5k para gravar no relatório final.
+O relatorio final output.txt contem os dados solicitados no teste do IDwall.
+
+Pontos de atenção: Por utilizar pyautogui, o foco da janela não deve ser alterada durante a execução do script.
+
+### Parte 2
+Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
+
+A solução deste problema foi desenvolvida no arquivo robotTel.py
+O programa importa os recursos de redditVotes.py, descritos na parte 1 da solução do problema.
+O script carrega o ID do bot do telegram que deveva ser monitorado.
+Para comunicação do python com o Telegram foi utilizado o telepot.
+O script seta um call-back para uma função que fará o tratamento da mensagem recebida via Telegram.
+Uma vez recebida a mensagem o sistema verifica se contem o comando /NadaPraFazer com a lista de parametros.
+Caso contenha somente o /NadaPraFazer, sem parametros, retorna uma mensagem com exemplo de uso ao usuário.
+Uma vez que a mensagem /NadaPraFazer seja recebida com seus devidos parametros o programa redditVotes.py é chamado.
+As operações descritas na parte 1 da solução do redditVotes.py serão executadas, no entanto, o arquivo de saida output.txt será enviado ao usuário do Telegram que fez a solicitação.
+
+

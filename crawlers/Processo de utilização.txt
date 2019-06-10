@@ -1,0 +1,54 @@
+### Utilização da solução do problema de threads com mais de 5k votos
+
+### Parte 1
+Gerar e imprimir uma lista contendo a pontuação, subreddit, título da thread, link para os comentários da thread e link da thread.
+Essa parte pode ser um CLI simples, desde que a formatação da impressão fique legível.
+
+O script da solução é o redditVotes.py e utiliza as seguintes dependencias:
+os;sys;time;shutil;argparse;tempfile;pyautogui;webbrowser;datetime;bs4;unidecode
+
+Para utilização do script redditVotes.py, o usuário deve estar no diretório .\desafios\crawlers e digitar o comando "python redditVotes.py" seguido da lista de parametros a ser pesquisada, um exemplo de comando ficaria assim:
+
+c:\desafios\crawlers>python redditVotes.py cars;movies;games
+
+Tambem pode ser obtido o help do comando "python redditVotes.py -h":
+
+    usage: redditVotes.py [-h] subreddit
+
+    Script de analise de votos em web site
+
+    positional arguments:
+      subreddit   Lista com nomes de subreddits separados por ponto-e-virgula
+                  (`;`). Ex: "askreddit;worldnews;cats"
+
+    optional arguments:
+      -h, --help  show this help message and exit
+
+Uma vez executado o comando o script se encarrega de:
+    1 - Abrir as paginas Web conforme a lista passada como parametro
+    2 - Salvar a pagina HTLM e analisar o numero de votos acima de 5k
+    3 - Gerar relatorio output.txt com as informações solicitadas pelo IDwall
+
+### Parte 2
+Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
+
+O script da solução é o robotTel.py e utiliza as seguintes dependencias:
+os;time;telepot;redditVotes;datetime;configparser
+
+Para utilização do script robotTel.py, o usuário deve abrir o arquivo robotTel.ini, no diretório .\desafios\crawlers e setar o ID do bot do telegram que deverá ser utilizado para os testes.
+Exemplo de arquivo robotTel.ini configurado com um idBot:
+
+[section_bot]
+idBot = 738748752:XPTOEX4xT9f94rtgjHTX7uRwDc8dE63fR3g
+
+Em seguida, ainda no mesmo diretório, digitar o comando "python robotTel.py"
+O sistema entra em um loop infinito e passa a aguardar a mensagem /NadaPraFazer com a respectiva lista de parametros do Telegram.
+Uma vez recebida a informação o sistema responde ao usuário do Telegram "Aguarde! Processando dados solicitados...".
+Em caso de algum erro encontrado o sistema irá responder ao usuário do Telegram "Desculpe! Ocorreram problemas, tente novamente.".
+Em caso de falta de parametros o sistema irá responder ao usuário do Telegram "Tente novamente Ex.: /NadaPraFazer programming;dogs;brazil".
+Em caso de sucesso o sistema retorna uma mensagem com o arquivo output.txt para ser aberto pelo usuário do Telegram.
+
+
+
+
+
